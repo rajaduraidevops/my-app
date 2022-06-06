@@ -6,7 +6,7 @@ node{
 
       def mvnHome =  tool name: 'maven3', type: 'maven'   
       sh "${mvnHome}/bin/mvn clean package"
-	  sh 'mv target/myweb*.war target/newapp1.war'
+	  sh 'mv target/myweb*.war target/newapp.war'
    }
    stage('SonarQube Analysis') {
 	        def mvnHome =  tool name: 'maven3', type: 'maven'
@@ -14,7 +14,7 @@ node{
 	          sh "${mvnHome}/bin/mvn sonar:sonar"
 	        }
 	    }
-   stage('Build Docker Imager'){
+   stage('Build Docker Image'){
    sh 'docker build -t saidamo/myweb:0.0.2 .'
    }
    stage('Docker Image Push'){
